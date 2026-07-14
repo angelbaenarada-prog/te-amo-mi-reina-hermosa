@@ -332,18 +332,18 @@
         <div class="story-section">
             
             <div class="card">
-                <h3> Siempre eres suficiente</h3>
+                <h3>Siempre eres suficiente</h3>
                 <p>Grábate esto en el corazón, mi vida: eres la mujer más increíble de este mundo. No te falta nada, brillas tal y como eres y me haces el novio más feliz del planeta.</p>
             </div>
 
             <div class="card">
-                <h3> Nuestra hermosa paciencia</h3>
+                <h3>Nuestra hermosa paciencia</h3>
                 <p>Sé que a veces hay días grises y cansados, pero no estás sola. Aquí estoy yo para cuidarte, escucharte y sostenerte. Vamos despacio, sanando juntos y con mucho amor.</p>
             </div>
 
             <div class="card">
-                <h3> Nuestro sueño por cumplir</h3>
-                <p>Pronto nos veremos juntos en 1 año más o menos. En unos 2 a 3 años por fin estaremos juntos para siempre en nuestra propia casita, donde seremos inmensamente felices y viviremos tranquilos con esa familia que tanto deseamos. </p>
+                <h3>Nuestro sueño por cumplir</h3>
+                <p>Pronto nos veremos juntos. En unos 2 a 3 años por fin estaremos juntos para siempre en nuestra propia casita, donde seremos inmensamente felices y viviremos tranquilos.</p>
             </div>
 
         </div>
@@ -366,7 +366,7 @@
 
     </div>
 
-    <!-- SCRIPT DE REPRODUCTOR YEFRAME DE YOUTUBE CONFIGURADO EN EL SEGUNDO 67 (1:07) -->
+    <!-- SCRIPT DE REPRODUCTOR DE YOUTUBE: "Enamorado Tuyo" -->
     <script>
         // Carga la API de YouTube de forma dinámica e interactiva
         var tag = document.createElement('script');
@@ -383,13 +383,13 @@
             player = new YT.Player('youtube-player', {
                 height: '1',
                 width: '1',
-                videoId: 'TMzrgENQVhA', // Tu video de YouTube actualizado
+                videoId: 'I8qUYSJ5CPg', // Enamorado Tuyo - El Cuarteto de Nos
                 playerVars: {
                     'autoplay': 0,
                     'controls': 0,
-                    'start': 67, // Segundo 67 (1:07) - El inicio del coro
+                    'start': 0, // Inicia desde el principio
                     'loop': 1,
-                    'playlist': 'TMzrgENQVhA',
+                    'playlist': 'I8qUYSJ5CPg',
                     'mute': 0
                 },
                 events: {
@@ -400,7 +400,7 @@
         }
 
         function onPlayerReady(event) {
-            player.seekTo(67); // Nos aseguramos de forzar el segundo 67
+            player.seekTo(0);
         }
 
         // Desbloqueamos el permiso de audio del navegador al primer toque de pantalla
@@ -419,7 +419,6 @@
             if (!player) return;
 
             if (!isPlaying) {
-                player.seekTo(67); // Iniciar siempre en el coro (1:07)
                 player.playVideo();
                 playBtn.innerText = "Pausar Canción";
                 isPlaying = true;
@@ -432,7 +431,7 @@
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.ENDED) {
-                player.seekTo(67);
+                player.seekTo(0);
                 player.playVideo();
             }
         }
