@@ -328,7 +328,7 @@
         <!-- Botón interactivo para lluvia mágica de brillitos -->
         <button class="sticker-trigger" onclick="spawnStickers()">¡Presiona aquí, mi amor! ✨</button>
 
-        <!-- SECCIÓN DE ESCRITOS CORTOS -->
+        <!-- SECCIÓN DE ESCRITOS CORTOS (Sin emojis en los títulos) -->
         <div class="story-section">
             
             <div class="card">
@@ -354,7 +354,7 @@
             <p class="envelope-text" id="envelopeLabel">Toca el sobre para abrir tu carta ✉️</p>
         </div>
 
-        <!-- CARTA CON TEXTO MEJORADO Y HERMOSO -->
+        <!-- CARTA CON TEXTO MEJORADO -->
         <div class="letter-content" id="myLetter">
             <p><span>Mi dulce reina Jeni,</span></p>
             <p>Felices 5 meses, mi vida hermosa. Cada día que pasa me convenzo más de que eres el amor de mi vida. Gracias por tu ternura, por tu risa y por regalarme tu corazón aun en la distancia.</p>
@@ -366,9 +366,9 @@
 
     </div>
 
-    <!-- SCRIPT DE REPRODUCTOR DE YOUTUBE: "Enamorado Tuyo" -->
+    <!-- SCRIPT DE REPRODUCTOR DE YOUTUBE: "Te Amo - Los Mier" -->
     <script>
-        // Carga la API de YouTube de forma dinámica e interactiva
+        // Carga la API de YouTube de forma dinámica
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -383,13 +383,13 @@
             player = new YT.Player('youtube-player', {
                 height: '1',
                 width: '1',
-                videoId: 'I8qUYSJ5CPg', // Enamorado Tuyo - El Cuarteto de Nos
+                videoId: 'bS8KeytSDfM', // ID del Short de Los Mier
                 playerVars: {
                     'autoplay': 0,
                     'controls': 0,
-                    'start': 0, // Inicia desde el principio
+                    'start': 0, 
                     'loop': 1,
-                    'playlist': 'I8qUYSJ5CPg',
+                    'playlist': 'bS8KeytSDfM',
                     'mute': 0
                 },
                 events: {
@@ -403,7 +403,7 @@
             player.seekTo(0);
         }
 
-        // Desbloqueamos el permiso de audio del navegador al primer toque de pantalla
+        // Desbloqueamos el permiso de reproducción del navegador con el primer click del usuario
         document.addEventListener('click', function() {
             if (!hasInteracted && player) {
                 player.playVideo();
@@ -436,7 +436,7 @@
             }
         }
 
-        /* GENERAR ESTRELLITAS QUE BRILLAN CONSTANTEMENTE EN EL FONDO */
+        /* GENERAR ESTRELLITAS CONSTANTES */
         const starsBg = document.getElementById('starsBg');
         const starCount = 50;
 
