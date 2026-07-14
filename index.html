@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felices 5 Meses, Mi Reina 👑</title>
+    <style>
+        :root {
+            --pink-light: #fff0f3;
+            --pink-sweet: #ffb7c5;
+            --pink-dark: #ff8fa3;
+            --berry: #800e26;
+            --bg-gradient: linear-gradient(135deg, #ffeef1 0%, #ffd1dc 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: #4a4a4a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* EFECTO DE ESTRELLAS CENTELLANTES EN EL FONDO */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px #ffb7c5;
+            animation: twinkle var(--duration, 3s) infinite ease-in-out;
+            opacity: 0.8;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { transform: scale(0.3); opacity: 0.2; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Música flotante */
+        .music-bar {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(220, 100, 120, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--pink-sweet);
+        }
+
+        .music-btn {
+            background: var(--pink-dark);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: 0.3s;
+        }
+
+        .music-btn:hover {
+            background: var(--berry);
+            transform: scale(1.05);
+        }
+
+        /* Ocultar el iframe de YouTube pero mantenerlo funcional */
+        #youtube-player {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 650px;
+            width: 100%;
+            margin-top: 60px;
+            background: rgba(255, 240, 243, 0.88);
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(220, 100, 120, 0.15);
+            text-align: center;
+            border: 2px solid rgba(255, 183, 197, 0.6);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: var(--berry);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(255, 143, 163, 0.2);
+        }
+
+        .subtitle {
+            color: var(--pink-dark);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        /* Botón Sorpresa de Stickers */
+        .sticker-trigger {
+            background: var(--pink-dark);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(255, 143, 163, 0.4);
+            transition: 0.3s;
+        }
+
+        .sticker-trigger:hover {
+            background: var(--berry);
+            transform: translateY(-3px);
+        }
+
+        /* Tarjetas de Historia */
+        .story-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border-left: 5px solid var(--pink-sweet);
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 183, 197, 0.4);
+        }
+
+        .card h3 {
+            color: var(--berry);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            line-height: 1.6;
+            font-size: 1.05rem;
+            color: #555;
+        }
+
+        /* Sección de la Carta Final (Sobre interactivo) */
+        .envelope-wrapper {
+            margin: 40px 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .envelope {
+            position: relative;
+            width: 200px;
+            height: 140px;
+            background: #ffcbd5;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        /* Tapa del sobre */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 80px solid #ff9ebb;
+            transform-origin: top;
+            transition: 0.5s transform ease;
+            z-index: 30;
+        }
+
+        /* Cuando se abre el sobre */
+        .envelope.open::before {
+            transform: rotateX(180deg);
+            z-index: 10;
+        }
+
+        .envelope-text {
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--berry);
+            font-size: 1.1rem;
+        }
+
+        /* Carta oculta que se expande */
+        .letter-content {
+            max-height: 0;
+            overflow: hidden;
+            background: #fffdf9;
+            border: 2px solid #ffcbd5;
+            border-radius: 20px;
+            padding: 0 25px;
+            margin-top: 20px;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 0 15px rgba(255, 183, 197, 0.1);
+            opacity: 0;
+        }
+
+        .letter-content.show {
+            max-height: 1200px;
+            padding: 30px 25px;
+            opacity: 1;
+            margin-bottom: 30px;
+        }
+
+        .letter-content p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #3d3d3d;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .letter-content p span {
+            font-weight: bold;
+            color: var(--berry);
+        }
+
+        /* Efectos visuales de pétalos/corazones/brillos flotantes */
+        .falling-element {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-20px) rotate(0deg) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CONTENEDOR DE ESTRELLAS DE FONDO -->
+    <div class="stars-container" id="starsBg"></div>
+
+    <!-- REPRODUCTOR INVISIBLE DE YOUTUBE -->
+    <div id="youtube-player"></div>
+
+    <!-- CONTROLES DE MÚSICA -->
+    <div class="music-bar">
+        <span style="font-size:1.2rem;">🎵</span>
+        <button class="music-btn" id="playMusic">Reproducir Canción</button>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+        <h1>Cinco Meses a Tu Lado</h1>
+        <p class="subtitle">Mi Reina Jeni 👑💖</p>
+
+        <!-- Botón interactivo para lluvia mágica de brillitos -->
+        <button class="sticker-trigger" onclick="spawnStickers()">¡Presiona aquí, mi amor! ✨</button>
+
+        <!-- SECCIÓN DE DETALLES -->
+        <div class="story-section">
+            
+            <div class="card">
+                <h3>El valor de lo que eres</h3>
+                <p>Quiero que te grabes esto en la mente hoy y siempre: eres suficiente. No necesitas compararte con nada ni con nadie, ni sentir que te falta algo para hacerme feliz. Para mí eres la mejor chica del mundo entero, y con solo ser tú, iluminas cada uno de mis días.</p>
+            </div>
+
+            <div class="card">
+                <h3>Nuestro pacto de paciencia</h3>
+                <p>Sé que a veces hay recuerdos y días pesados en los que la cabecita te quiere hacer una mala jugada, pero aquí estoy yo para recordarte que no estás sola. Me encanta escucharte, apoyarte y estar pendiente de ti sin importar la distancia. Vamos paso a paso, aprendiendo juntos a sanar y a cuidarnos.</p>
+            </div>
+
+            <div class="card">
+                <h3>El destino que estamos construyendo</h3>
+                <p>Pronto nos veremos juntos, mi vida. Lo que hoy se siente lejano por la distancia, es solo la preparación para el hermoso futuro que nos espera. En un plazo de 2 a 3 años, por fin estaremos juntos para siempre, viviendo en nuestra casita propia donde seremos inmensamente felices, sin que nada ni nadie pueda apagar nuestra paz. Todo mi esfuerzo y dedicación de hoy van dirigidos hacia esa meta, porque eres el amor de mi vida.</p>
+            </div>
+
+        </div>
+
+        <!-- SOBRE INTERACTIVO DE LA CARTA -->
+        <div class="envelope-wrapper">
+            <div class="envelope" id="myEnvelope" onclick="openLetter()"></div>
+            <p class="envelope-text" id="envelopeLabel">Toca el sobre para abrir tu carta ✉️</p>
+        </div>
+
+        <!-- CARTA -->
+        <div class="letter-content" id="myLetter">
+            <p><span>Mi hermosa reina Jeni,</span></p>
+            <p>Hoy cumplimos 5 meses de haber tomado la mejor decisión de nuestras vidas. Quiero aprovechar este día para escribirte con el corazón abierto. A veces la distancia física se siente como un obstáculo difícil, pero cuando leo tus mensajes, cuando escucho tu risa o cuando simplemente compartimos un momento de calidad, me doy cuenta de que estamos conectados por algo mucho más fuerte que cualquier mapa.</p>
+            <p>Ayer, mientras hablábamos, sentí una inmensa necesidad de recordarte lo valiosa que eres. No quiero que jamás vuelvas a dudar de ti misma, porque eres suficiente tal y como eres. Tienes un corazón precioso, una dulzura única y una fuerza increíble, aunque a veces el cansancio mental te haga olvidar lo maravillosa que eres.</p>
+            <p>Te prometo que no me cansaré de recordártelo. Te prometo acompañarte en tus días grises tanto como en tus días felices. Estoy dispuesto a cuidar de ti, a escucharte sin juzgarte y a construir un espacio donde te sientas completamente segura y amada.</p>
+            <p>Sé paciente con el proceso, mi amor. Los planes que tenemos no son solo palabras; son la promesa de una vida entera. En 2 o 3 años, cuando estemos finalmente juntos compartiendo nuestro propio hogar y construyendo nuestra felicidad día con día, miraremos atrás y sabremos que cada momento de espera valió la pena.</p>
+            <p>Gracias por estos 5 hermosos meses llenos de aprendizajes, risas y un amor tan real. Te amo con todas mis fuerzas, hoy, mañana y para siempre.</p>
+            <p style="text-align: right; font-weight: bold; color: var(--berry); margin-top: 20px;">— Tu novio, Ángel ❤️</p>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT DE REPRODUCTOR YEFRAME Y EFECTOS -->
+    <script>
+        // Cargar API de YouTube
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var isPlaying = false;
+        const playButton = document.getElementById('playMusic');
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '1',
+                width: '1',
+                videoId: 'aeE-PPOxqWY', // Video "Los Mier - Te Amo"
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'start': 70, // Iniciar en el segundo 70 (1:10) - "Te amo, te amo..."
+                    'loop': 1,
+                    'playlist': 'aeE-PPOxqWY'
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        playButton.addEventListener('click', function() {
+            if (!player) return;
+
+            if (!isPlaying) {
+                player.seekTo(70); // Volver a asegurar que empiece en el segundo 70
+                player.playVideo();
+                playButton.innerText = "Pausar Canción";
+                isPlaying = true;
+            } else {
+                player.pauseVideo();
+                playButton.innerText = "Reproducir Canción";
+                isPlaying = false;
+            }
+        });
+
+        function onPlayerStateChange(event) {
+            // Si termina, reiniciar en el segundo 70 para mantener el bucle en esa zona romántica
+            if (event.data === YT.PlayerState.ENDED) {
+                player.seekTo(70);
+                player.playVideo();
+            }
+        }
+
+        /* GENERAR ESTRELLITAS QUE BRILLAN EN EL FONDO */
+        const starsBg = document.getElementById('starsBg');
+        const starCount = 60;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            const size = Math.random() * (4 - 1.5) + 1.5;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.setProperty('--duration', (Math.random() * (5 - 2) + 2) + 's');
+            starsBg.appendChild(star);
+        }
+
+        /* LLUVIA MÁGICA INTERACTIVA DE BRILLITOS Y CORAZONES */
+        function spawnStickers() {
+            const sparkles = ['⭐', '✨', '💖', '👑', '🌸', '✨', '💛'];
+            for(let i=0; i<25; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.classList.add('falling-element');
+                    el.innerText = sparkles[Math.floor(Math.random() * sparkles.length)];
+                    el.style.left = Math.random() * 100 + 'vw';
+                    el.style.fontSize = Math.random() * (30 - 12) + 12 + 'px';
+                    el.style.animationDuration = Math.random() * (4 - 2.5) + 2.5 + 's';
+                    
+                    // Añadir sombra para que brillen más
+                    el.style.textShadow = '0 0 8px rgba(255, 255, 255, 0.9)';
+                    
+                    document.body.appendChild(el);
+
+                    setTimeout(() => el.remove(), 4000);
+                }, i * 80);
+            }
+        }
+
+        /* CONTROL DE LA CARTA INTERACTIVA */
+        function openLetter() {
+            const envelope = document.getElementById('myEnvelope');
+            const letter = document.getElementById('myLetter');
+            const label = document.getElementById('envelopeLabel');
+
+            if (!envelope.classList.contains('open')) {
+                envelope.classList.add('open');
+                label.innerText = "¡Abriendo tu cartita...! ✨";
+                
+                setTimeout(() => {
+                    letter.classList.add('show');
+                    label.innerText = "Leído con todo mi amor ❤️";
+                    letter.scrollIntoView({ behavior: 'smooth' });
+                }, 600);
+            } else {
+                envelope.classList.remove('open');
+                letter.classList.remove('show');
+                label.innerText = "Toca el sobre para abrir tu carta ✉️";
+            }
+        }
+
+        // Caída suave automática de estrellas fugaces de fondo
+        setInterval(() => {
+            const leaf = document.createElement('div');
+            leaf.classList.add('falling-element');
+            leaf.innerText = '✨';
+            leaf.style.left = Math.random() * 100 + 'vw';
+            leaf.style.fontSize = '12px';
+            leaf.style.opacity = '0.6';
+            leaf.style.animationDuration = '7s';
+            document.body.appendChild(leaf);
+            setTimeout(() => leaf.remove(), 7000);
+        }, 2500);
+    </script>
+</body>
+</html>
