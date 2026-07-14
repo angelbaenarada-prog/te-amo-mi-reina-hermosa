@@ -124,7 +124,7 @@
             z-index: 1;
         }
 
-        /* Letra más linda y grande para el título principal */
+        /* Letra hermosa y grande para el título */
         h1 {
             font-family: var(--font-title);
             color: var(--berry);
@@ -186,7 +186,6 @@
             box-shadow: 0 8px 15px rgba(255, 183, 197, 0.3);
         }
 
-        /* Títulos de las tarjetas con letra hermosa */
         .card h3 {
             font-family: var(--font-title);
             color: var(--berry);
@@ -333,18 +332,18 @@
         <div class="story-section">
             
             <div class="card">
-                <h3>🌸 Siempre eres suficiente</h3>
+                <h3> Siempre eres suficiente</h3>
                 <p>Grábate esto en el corazón, mi vida: eres la mujer más increíble de este mundo. No te falta nada, brillas tal y como eres y me haces el novio más feliz del planeta.</p>
             </div>
 
             <div class="card">
-                <h3>🤝 Nuestra hermosa paciencia</h3>
+                <h3> Nuestra hermosa paciencia</h3>
                 <p>Sé que a veces hay días grises y cansados, pero no estás sola. Aquí estoy yo para cuidarte, escucharte y sostenerte. Vamos despacio, sanando juntos y con mucho amor.</p>
             </div>
 
             <div class="card">
-                <h3>🏡 Nuestro sueño por cumplir</h3>
-                <p>Pronto nos veremos juntos. En unos 2 a 3 años por fin estaremos juntos para siempre en nuestra propia casita, donde seremos inmensamente felices y viviremos tranquilos.</p>
+                <h3> Nuestro sueño por cumplir</h3>
+                <p>Pronto nos veremos juntos en 1 año más o menos. En unos 2 a 3 años por fin estaremos juntos para siempre en nuestra propia casita, donde seremos inmensamente felices y viviremos tranquilos con esa familia que tanto deseamos. </p>
             </div>
 
         </div>
@@ -367,7 +366,7 @@
 
     </div>
 
-    <!-- SCRIPT DE REPRODUCTOR YEFRAME DE YOUTUBE COMPATIBLE -->
+    <!-- SCRIPT DE REPRODUCTOR YEFRAME DE YOUTUBE CONFIGURADO EN EL SEGUNDO 67 (1:07) -->
     <script>
         // Carga la API de YouTube de forma dinámica e interactiva
         var tag = document.createElement('script');
@@ -384,13 +383,13 @@
             player = new YT.Player('youtube-player', {
                 height: '1',
                 width: '1',
-                videoId: 'aeE-PPOxqWY', // Video "Los Mier - Te Amo"
+                videoId: 'TMzrgENQVhA', // Tu video de YouTube actualizado
                 playerVars: {
                     'autoplay': 0,
                     'controls': 0,
-                    'start': 70, // Minuto 1:10 ("Te amo, te amo, dime que no te vas a ir...")
+                    'start': 67, // Segundo 67 (1:07) - El inicio del coro
                     'loop': 1,
-                    'playlist': 'aeE-PPOxqWY',
+                    'playlist': 'TMzrgENQVhA',
                     'mute': 0
                 },
                 events: {
@@ -401,14 +400,12 @@
         }
 
         function onPlayerReady(event) {
-            // Aseguramos que empiece en el segundo 70
-            player.seekTo(70);
+            player.seekTo(67); // Nos aseguramos de forzar el segundo 67
         }
 
-        // Si Jeni toca cualquier parte de la pantalla, desbloqueamos los permisos del navegador
+        // Desbloqueamos el permiso de audio del navegador al primer toque de pantalla
         document.addEventListener('click', function() {
             if (!hasInteracted && player) {
-                // Hacemos un play/pause rápido de 1ms para activar el canal de audio del celular
                 player.playVideo();
                 setTimeout(() => {
                     if(!isPlaying) player.pauseVideo();
@@ -418,11 +415,11 @@
         }, { once: true });
 
         playBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Evitar doble clic
+            e.stopPropagation();
             if (!player) return;
 
             if (!isPlaying) {
-                player.seekTo(70);
+                player.seekTo(67); // Iniciar siempre en el coro (1:07)
                 player.playVideo();
                 playBtn.innerText = "Pausar Canción";
                 isPlaying = true;
@@ -434,9 +431,8 @@
         });
 
         function onPlayerStateChange(event) {
-            // Si el video se detiene o termina solo, lo regresamos al segundo 70
             if (event.data === YT.PlayerState.ENDED) {
-                player.seekTo(70);
+                player.seekTo(67);
                 player.playVideo();
             }
         }
